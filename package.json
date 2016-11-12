@@ -1,0 +1,19 @@
+{
+  "name": "period",
+  "version": "1.0.0",
+  "description": "Multi purpose countdown timer for AV professionals",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DrewLX/Period.git"
+  },
+  "author": "Drew Perry & Nick Lloyd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DrewLX/Period/issues"
+  },
+  "homepage": "https://github.com/DrewLX/Period#readme"
+}
