@@ -5,7 +5,6 @@
 	<title>Period - Control</title>
 
 	<!-- Stylesheets -->
-    <link rel="stylesheet" href="css/photon.min.css">
     <link rel="stylesheet" href="css/control.css">
     <script src="node_modules/vue/dist/vue.js"></script>
 </head>
@@ -15,13 +14,17 @@
 
 <div id="app">
 
-<h1>Period Control</h1>
+	<div id="titlebar">Period Control</div>
 
-			{{message}}
 
-<div id="disp_control" class="padded-more" >
-	<button class="btn btn-large btn-primary">Create Display</button>
-</div>
+	<div id="disp_control" class="padded-more">
+		<button class="btn">Create Display</button>
+	</div>
+
+
+	<div id="footer">
+		Electron: <script>document.write(process.versions.electron)</script>
+	</div>
 
 </div>
 
