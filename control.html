@@ -24,7 +24,8 @@
 	</div>
 
 	<div id="disp_control">
-		<button>New Window Output</button>
+		<p class="title">Display Controls</p>
+		<button @click="NewOutputWindow">New Output Window</button>
 	</div>
 
 
@@ -35,16 +36,6 @@
 </div>
 
 
-
-<script>
-	var app = new Vue({
-	  el: '#app',
-	  data: {
-	    message: 'Hello Vue!'
-	  }
-	})
-</script>
-
-
+<script>require('./control.js')</script>
 </body>
 </html>

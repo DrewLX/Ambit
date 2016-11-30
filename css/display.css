@@ -1,0 +1,16 @@
+body {
+  background-color: #21252B;
+  color: #A9B0BE;
+  height: 100%;
+
+  font-family: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, "Segoe UI", sans-serif;
+  font-size: 32px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+div {
+  padding: 10px;
+  width: 100%;
+  margin: auto;
+}

@@ -12,3 +12,10 @@ app.on('ready', () => {
 
 	win.webContents.openDevTools()
 })
+
+
+exports.NewOutputWindow = () => {
+	let win = new BrowserWindow({width: 640, height: 360})
+	win.loadURL('file://' + __dirname + '/display.html')
+	log.info('New Output Window Launched')
+}
