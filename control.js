@@ -12,6 +12,9 @@ const main = remote.require('./main.js')
     methods: {
       NewOutputWindow: function() {
         main.NewOutputWindow()
-      }
+      },
+			NewOutputFullscreen: function() {
+				main.NewOutputFullscreen()
+			}
     }
 	})
