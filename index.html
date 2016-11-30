@@ -6,19 +6,35 @@
 
 	<!-- Stylesheets -->
     <link rel="stylesheet" href="css/photon.min.css">
+    <link rel="stylesheet" href="css/control.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
 </head>
 
 <body>
 
 
-<div class="window">
-	<div class="window-content">
-		<div class="pane">
-			<h1>Period Control</h1>
-		</div>
-	</div>
+<div id="app">
+
+<h1>Period Control</h1>
+
+			{{message}}
+
+<div id="disp_control" class="padded-more" >
+	<button class="btn btn-large btn-primary">Create Display</button>
 </div>
 
+</div>
+
+
+
+<script>
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+	    message: 'Hello Vue!'
+	  }
+	})
+</script>
 
 
 </body>
