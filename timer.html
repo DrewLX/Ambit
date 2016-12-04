@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Period - TIMER</title>
+
+	<!-- Stylesheets -->
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+<div id="app">
+
+	<h1>TIMER</h1>
+<hr>
+		<p>Remaining: <strong>{{secsRemaining}}</strong></p>
+
+    <hr>
+    <button @click="startTimer">Start Timer</button>
+    <button @click="stopTimer">Stop Timer</button>
+</div>
+
+
+<script>require('./js/timer.js')</script>
+</body>
+</html>

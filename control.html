@@ -20,22 +20,21 @@
 	<h1>Period Control</h1>
 <hr>
 	<div id="time">
-		<p>Remaining: <strong>10m 00s</strong></p>
-		<button>Start</button>
-		<button>Pause</button>
-		<button>Stop</button>
+		<p>Remaining: <strong>{{secsRemaining}}</strong></p>
+		<button @click="StartTimer">Start</button>
+		<button @click="PauseTimer">Pause</button>
+		<button @click="StopTimer">Stop</button>
 	</div>
 <hr>
 	<div id="disp_control">
 		<p class="title">Display Controls</p>
 		<button @click="NewOutputWindow">New Output Window</button>
-		<button @click="NewOutputFullscreen">New Output Fullscreen</button>
 	</div>
 
 
 </div>
 
 
-<script>require('./control.js')</script>
+<script>require('./js/control.js')</script>
 </body>
 </html>
