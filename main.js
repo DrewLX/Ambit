@@ -4,11 +4,14 @@ var os = require('os')
 var log = require('electron-log');
 var timer = require('timers')
 
-var secsRemaining = 600
-var currentTimer = null
+var currentTimer = null // will be used for our timer object
 
 let control = null // this will be control window
 let win = null // this will be display window...
+
+global.shared = {
+	secsRemaining: 600
+}
 
 log.info('Period App Launched');
 
@@ -37,21 +40,23 @@ exports.PauseTimer = () => {
 
 exports.StopTimer = () => {
 	timer.clearInterval(currentTimer)
-	secsRemaining = 600
+	global.shared.secsRemaining = 600
 	updateTime()
 	log.info('Timer Stopped')
 }
 
 function doTimer() {
-	secsRemaining--;
+	global.shared.secsRemaining--;
 	updateTime();
 }
 
 function updateTime() {
 	// update time on any current displays
-	control.webContents.send('updateTime', secsRemaining) // update control window
-	win.webContents.send('updateTime', secsRemaining) // update display window
-	log.info(secsRemaining)
+	control.webContents.send('updateTime', global.shared.secsRemaining) // update control window
+
+	if (win !== null) {
+		win.webContents.send('updateTime', global.shared.secsRemaining) // update display window
+	}
 }
 
 

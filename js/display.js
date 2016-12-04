@@ -11,7 +11,7 @@ ipcRenderer.on('updateTime', (event, message) => {
 	var vue = new Vue({
 	  el: '#app',
 	  data: {
-	    secsRemaining: 0
+	    secsRemaining: remote.getGlobal('shared').secsRemaining
 	  },
 
 	})

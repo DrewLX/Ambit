@@ -5,13 +5,13 @@ const {ipcRenderer} = require('electron')
 
 ipcRenderer.on('updateTime', (event, message) => {
 	vue.secsRemaining=message;
-	console.log('updateTime Run')
+	//console.log('updateTime Run')
 })
 
 	var vue = new Vue({
 	  el: '#app',
 	  data: {
-	    secsRemaining: 60
+	    secsRemaining: remote.getGlobal('shared').secsRemaining
 	  },
 
     methods: {
