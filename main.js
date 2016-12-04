@@ -1,8 +1,9 @@
-const electron = require('electron')
-const {app, BrowserWindow, ipcMain} = electron
-var os = require('os')
+const electron = require('electron');
+const {app, BrowserWindow, ipcMain} = electron;
+var os = require('os');
 var log = require('electron-log');
-var timer = require('timers')
+var timer = require('timers');
+var osc = require('node-osc');
 
 var currentTimer = null // will be used for our timer object
 
@@ -60,7 +61,7 @@ exports.StopTimer = () => {
 }
 
 exports.SetSpeed = (speed) => {
-	if (currentTimer !== null) {
+	if (global.shared.timerMode == 'Running') {
 		timer.clearInterval(currentTimer)
 		global.shared.timerInterval = speed;
 		currentTimer = timer.setInterval(doTimer, global.shared.timerInterval)
@@ -101,3 +102,23 @@ exports.NewOutputWindow = () => {
 		log.info('Output Window Closed')
 	})
 }
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+//            O S C     S E R V E R
+var oscServer = new osc.Server(3333, '0.0.0.0');
+
+oscServer.on("/timer/start", function (msg, rinfo) {
+	log.info("OSC Received: /timer/start");
+	exports.StartTimer();
+});
+
+oscServer.on("/timer/pause", function (msg, rinfo) {
+	log.info("OSC Received: /timer/pause");
+	exports.PauseTimer();
+});
+
+oscServer.on("/timer/stop", function (msg, rinfo) {
+	log.info("OSC Received: /timer/stop");
+	exports.StopTimer();
+});
