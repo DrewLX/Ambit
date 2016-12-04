@@ -26,12 +26,15 @@
 		<button @click="StopTimer">Stop</button>
 		<hr>
 
-		<button @click="SetSpeed(1250)">0.75x</button>
-		<button @click="SetSpeed(1100)">0.9x</button>
-		<button @click="SetSpeed(1000)">1x</button>
-		<button @click="SetSpeed(900)">1.1x</button>
-		<button @click="SetSpeed(750)">1.25x</button>
-		Speed: {{timerInterval}}
+		<button @click="SetSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
+		<button @click="SetSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
+		<button @click="SetSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
+		<button @click="SetSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
+		<button @click="SetSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
+		Speed: {{timerInterval}}ms
+
+
+
 	</div>
 <hr>
 	<div id="disp_control">
