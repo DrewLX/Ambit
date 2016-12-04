@@ -5,6 +5,7 @@ const {ipcRenderer} = require('electron')
 
 ipcRenderer.on('updateTime', (event, message) => {
 	vue.secsRemaining=message;
+	vue.secsElapsed=remote.getGlobal('shared').secsElapsed;
 	//console.log('updateTime Run')
 })
 ipcRenderer.on('timerInterval', (event, message) => {
@@ -18,6 +19,7 @@ ipcRenderer.on('timerMode', (event, message) => {
 	  el: '#app',
 	  data: {
 	    secsRemaining: remote.getGlobal('shared').secsRemaining,
+			secsElapsed: remote.getGlobal('shared').secsElapsed,
 			timerInterval: remote.getGlobal('shared').timerInterval,
 			timerMode: remote.getGlobal('shared').timerMode,
 	  },
@@ -45,6 +47,14 @@ ipcRenderer.on('timerMode', (event, message) => {
 					var h = Math.floor(this.secsRemaining / 3600);
 					var m = Math.floor(this.secsRemaining % 3600 / 60);
 					var s = Math.floor(this.secsRemaining % 3600 % 60);
+
+					var hh = h>0? h + "h " : "";
+					return hh + m + "m " + s + "s";
+			},
+			timeElapsed: function() {
+					var h = Math.floor(this.secsElapsed / 3600);
+					var m = Math.floor(this.secsElapsed % 3600 / 60);
+					var s = Math.floor(this.secsElapsed % 3600 % 60);
 
 					var hh = h>0? h + "h " : "";
 					return hh + m + "m " + s + "s";

@@ -93,7 +93,7 @@ function updateTime() {
 exports.NewOutputWindow = () => {
 	win = new BrowserWindow({width: 640, height: 360})
 	win.loadURL('file://' + __dirname + '/display.html')
-	win.webContents.openDevTools()
+	//win.webContents.openDevTools()
 	log.info('New Output Window Launched (ID: ' + win.id + ')')
 
 
@@ -121,4 +121,9 @@ oscServer.on("/timer/pause", function (msg, rinfo) {
 oscServer.on("/timer/stop", function (msg, rinfo) {
 	log.info("OSC Received: /timer/stop");
 	exports.StopTimer();
+});
+
+oscServer.on("/timer/speed", function (msg, rinfo) {
+	log.info("OSC Received: /timer/speed - Setting to: " + msg[1]);
+	exports.SetSpeed(msg[1]);
 });

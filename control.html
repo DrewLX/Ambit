@@ -22,7 +22,7 @@
 	<div class="panel" :class="{ 'panel-success':timerMode=='Running', 'panel-warning':timerMode=='Paused', 'panel-danger':timerMode=='Stopped'}">
 		<div class="panel-heading">Timer Controls - {{timerMode}}</div>
 		<div class="panel-body">
-			<p>Remaining: <strong>{{timeRemaining}}</strong></p>
+			<p>Remaining: <strong>{{timeRemaining}}</strong><span v-if="timerMode!=='Stopped'"> - Elapsed: {{timeElapsed}}</span></p>
 			<button @click="StartTimer" class="btn btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
 			<button @click="PauseTimer" class="btn btn-warning"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span>Pause</button>
 			<button @click="StopTimer" class="btn btn-danger"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</button>
