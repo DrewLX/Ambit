@@ -15,32 +15,39 @@
 <body>
 
 
-<div id="app">
+<div id="app" class="container">
 
 	<h1>Period Control</h1>
-<hr>
-	<div id="time">
-		<p>Remaining: <strong>{{timeRemaining}}</strong></p>
-		<button @click="StartTimer">Start</button>
-		<button @click="PauseTimer">Pause</button>
-		<button @click="StopTimer">Stop</button>
-		<hr>
 
-		<button @click="SetSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
-		<button @click="SetSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
-		<button @click="SetSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
-		<button @click="SetSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
-		<button @click="SetSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
-		Speed: {{timerInterval}}ms
-
-
-
+	<div class="panel panel-primary">
+		<div class="panel-heading">Timer Controls</div>
+		<div class="panel-body">
+			<p>Remaining: <strong>{{timeRemaining}}</strong></p>
+			<button @click="StartTimer">Start</button>
+			<button @click="PauseTimer">Pause</button>
+			<button @click="StopTimer">Stop</button>
+		</div>
 	</div>
-<hr>
-	<div id="disp_control">
+
+
+		<div class="panel panel-info">
+			<div class="panel-heading">Speed Controls</div>
+			<div class="panel-body">
+				<button @click="SetSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
+				<button @click="SetSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
+				<button @click="SetSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
+				<button @click="SetSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
+				<button @click="SetSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
+				Speed: {{timerInterval}}ms
+			</div>
+		</div>
+
+
+
+
 		<p class="title">Display Controls</p>
 		<button @click="NewOutputWindow">New Output Window</button>
-	</div>
+
 
 
 </div>
