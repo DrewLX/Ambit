@@ -1,6 +1,7 @@
 const remote = require('electron').remote
 const main = remote.require('./main.js')
 
+const {ipcRenderer} = require('electron')
 
 
 	var app = new Vue({
@@ -10,7 +11,7 @@ const main = remote.require('./main.js')
 	  },
 
     methods: {
-      NewOutputWindow: function() {
+			NewOutputWindow: function() {
         main.NewOutputWindow()
       },
 			NewOutputFullscreen: function() {

@@ -1,12 +1,15 @@
 const remote = require('electron').remote
 const main = remote.require('./main.js')
+const {ipcRenderer} = require('electron')
+
+os = require('os')
 
 
 
 	var app = new Vue({
 	  el: '#app',
 	  data: {
-	    message: 'Hello Vue!'
+	    secsRemaining: remote.getGlobal('timer').secsRemaining
 	  },
 
 	})
