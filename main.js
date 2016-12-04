@@ -11,7 +11,9 @@ let win = null // this will be display window...
 
 global.shared = {
 	secsRemaining: 600,
-	timerInterval: 1000
+	secsElapsed: 0,
+	timerInterval: 1000,
+	timerMode: 'Stopped'
 }
 
 log.info('Period App Launched');
@@ -34,19 +36,26 @@ app.on('will-quit', () => {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //      T I M E R     F U N C T I O N S
 exports.StartTimer = () => {
-	log.info('Timer Started')
 	currentTimer = timer.setInterval(doTimer, global.shared.timerInterval)
+	global.shared.timerMode = 'Running'
+	control.webContents.send('timerMode', global.shared.timerMode)
+	log.info('Timer Started')
 }
 
 exports.PauseTimer = () => {
 	timer.clearInterval(currentTimer)
+	global.shared.timerMode = 'Paused'
+	control.webContents.send('timerMode', global.shared.timerMode)
 	log.info('Timer Paused')
 }
 
 exports.StopTimer = () => {
 	timer.clearInterval(currentTimer)
 	global.shared.secsRemaining = 600
+	global.shared.secsElapsed = 0;
 	updateTime()
+	global.shared.timerMode = 'Stopped'
+	control.webContents.send('timerMode', global.shared.timerMode)
 	log.info('Timer Stopped')
 }
 
@@ -64,6 +73,7 @@ exports.SetSpeed = (speed) => {
 
 function doTimer() {
 	global.shared.secsRemaining--;
+	global.shared.secsElapsed++;
 	updateTime();
 }
 

@@ -10,12 +10,16 @@ ipcRenderer.on('updateTime', (event, message) => {
 ipcRenderer.on('timerInterval', (event, message) => {
 	vue.timerInterval=message;
 })
+ipcRenderer.on('timerMode', (event, message) => {
+	vue.timerMode=message;
+})
 
 	var vue = new Vue({
 	  el: '#app',
 	  data: {
 	    secsRemaining: remote.getGlobal('shared').secsRemaining,
 			timerInterval: remote.getGlobal('shared').timerInterval,
+			timerMode: remote.getGlobal('shared').timerMode,
 	  },
 
     methods: {
