@@ -61,7 +61,7 @@ function updateTime() {
 
 
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            W I N D O W     F U N C T I O N S
 exports.NewOutputWindow = () => {
 	win = new BrowserWindow({width: 640, height: 360})
