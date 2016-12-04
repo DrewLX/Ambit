@@ -3,7 +3,6 @@ const main = remote.require('./main.js')
 
 const {ipcRenderer} = require('electron')
 
-
 	var app = new Vue({
 	  el: '#app',
 	  data: {

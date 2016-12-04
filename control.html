@@ -5,8 +5,11 @@
 	<title>Period - Control</title>
 
 	<!-- Stylesheets -->
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/control.css">
     <script src="node_modules/vue/dist/vue.js"></script>
+		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -14,25 +17,21 @@
 
 <div id="app">
 
-	<div id="titlebar">Period Control</div>
-
+	<h1>Period Control</h1>
+<hr>
 	<div id="time">
 		<p>Remaining: <strong>10m 00s</strong></p>
 		<button>Start</button>
 		<button>Pause</button>
 		<button>Stop</button>
 	</div>
-
+<hr>
 	<div id="disp_control">
 		<p class="title">Display Controls</p>
 		<button @click="NewOutputWindow">New Output Window</button>
 		<button @click="NewOutputFullscreen">New Output Fullscreen</button>
 	</div>
 
-
-	<div id="footer">
-		Electron: <script>document.write(process.versions.electron)</script>
-	</div>
 
 </div>
 
