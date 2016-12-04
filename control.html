@@ -17,7 +17,7 @@
 
 <div id="app" class="container">
 
-	<h1>Period Control</h1>
+	<h2 class="text-center">Period Control</h2>
 
 	<div class="panel" :class="{ 'panel-success':timerMode=='Running', 'panel-warning':timerMode=='Paused', 'panel-danger':timerMode=='Stopped'}">
 		<div class="panel-heading">Timer Controls - {{timerMode}}</div>
@@ -31,25 +31,26 @@
 
 
 		<div class="panel panel-info">
-			<div class="panel-heading">Speed Controls</div>
+			<div class="panel-heading">Speed Controls - {{timerInterval}}ms</div>
 			<div class="panel-body">
 				<div class="btn-group">
-				<button @click="SetSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
-				<button @click="SetSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
-				<button @click="SetSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
-				<button @click="SetSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
-				<button @click="SetSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
-			</div>
-				Speed: {{timerInterval}}ms
+					<button @click="SetSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
+					<button @click="SetSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
+					<button @click="SetSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
+					<button @click="SetSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
+					<button @click="SetSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
+				</div>
 			</div>
 		</div>
 
 
 
-
-		<p class="title">Display Controls</p>
-		<button @click="NewOutputWindow">New Output Window</button>
-
+		<div class="panel panel-info">
+			<div class="panel-heading">Display Controls</div>
+			<div class="panel-body">
+				<button @click="NewOutputWindow" class="btn btn-info">New Output Window</button>
+			</div>
+		</div>
 
 
 </div>

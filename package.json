@@ -1,5 +1,6 @@
 {
   "name": "period",
+  "productName": "Period",
   "version": "0.0.1",
   "description": "Multi purpose countdown timer for AV professionals",
   "main": "main.js",
