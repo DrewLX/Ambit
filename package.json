@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/DrewLX/Period/issues"
   },
-  "homepage": "https://github.com/DrewLX/Period#readme"
+  "homepage": "https://github.com/DrewLX/Period#readme",
+  "devDependencies": {
+    "devtron": "^1.4.0"
+  }
 }
