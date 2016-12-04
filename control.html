@@ -24,6 +24,14 @@
 		<button @click="StartTimer">Start</button>
 		<button @click="PauseTimer">Pause</button>
 		<button @click="StopTimer">Stop</button>
+		<hr>
+
+		<button @click="SetSpeed(1250)">0.75x</button>
+		<button @click="SetSpeed(1100)">0.9x</button>
+		<button @click="SetSpeed(1000)">1x</button>
+		<button @click="SetSpeed(900)">1.1x</button>
+		<button @click="SetSpeed(750)">1.25x</button>
+		Speed: {{timerInterval}}
 	</div>
 <hr>
 	<div id="disp_control">

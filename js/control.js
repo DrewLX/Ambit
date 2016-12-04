@@ -7,11 +7,15 @@ ipcRenderer.on('updateTime', (event, message) => {
 	vue.secsRemaining=message;
 	//console.log('updateTime Run')
 })
+ipcRenderer.on('timerInterval', (event, message) => {
+	vue.timerInterval=message;
+})
 
 	var vue = new Vue({
 	  el: '#app',
 	  data: {
-	    secsRemaining: remote.getGlobal('shared').secsRemaining
+	    secsRemaining: remote.getGlobal('shared').secsRemaining,
+			timerInterval: remote.getGlobal('shared').timerInterval,
 	  },
 
     methods: {
@@ -24,6 +28,9 @@ ipcRenderer.on('updateTime', (event, message) => {
 			StopTimer: function() {
         main.StopTimer()
       },
+			SetSpeed: function(speed) {
+				main.SetSpeed(speed)
+			},
 			NewOutputWindow: function() {
         main.NewOutputWindow()
       },

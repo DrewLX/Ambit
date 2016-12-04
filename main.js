@@ -10,7 +10,8 @@ let control = null // this will be control window
 let win = null // this will be display window...
 
 global.shared = {
-	secsRemaining: 600
+	secsRemaining: 600,
+	timerInterval: 1000
 }
 
 log.info('Period App Launched');
@@ -19,6 +20,10 @@ app.on('ready', () => {
 	control = new BrowserWindow({width:800, height:900})
 	control.loadURL('file://' + __dirname + '/control.html')
 	control.webContents.openDevTools()
+
+	control.on('closed', () => {
+		app.quit();
+	})
 })
 
 app.on('will-quit', () => {
@@ -30,7 +35,7 @@ app.on('will-quit', () => {
 //      T I M E R     F U N C T I O N S
 exports.StartTimer = () => {
 	log.info('Timer Started')
-	currentTimer = timer.setInterval(doTimer, 1000)
+	currentTimer = timer.setInterval(doTimer, global.shared.timerInterval)
 }
 
 exports.PauseTimer = () => {
@@ -45,6 +50,18 @@ exports.StopTimer = () => {
 	log.info('Timer Stopped')
 }
 
+exports.SetSpeed = (speed) => {
+	if (currentTimer !== null) {
+		timer.clearInterval(currentTimer)
+		global.shared.timerInterval = speed;
+		currentTimer = timer.setInterval(doTimer, global.shared.timerInterval)
+	} else {
+		global.shared.timerInterval = speed;
+	}
+	control.webContents.send('timerInterval', global.shared.timerInterval)
+	log.info('Speed Set:' + speed)
+}
+
 function doTimer() {
 	global.shared.secsRemaining--;
 	updateTime();
@@ -53,7 +70,6 @@ function doTimer() {
 function updateTime() {
 	// update time on any current displays
 	control.webContents.send('updateTime', global.shared.secsRemaining) // update control window
-
 	if (win !== null) {
 		win.webContents.send('updateTime', global.shared.secsRemaining) // update display window
 	}
