@@ -4,6 +4,7 @@ var os = require('os');
 var log = require('electron-log');
 var timer = require('timers');
 var osc = require('node-osc');
+var fs = require('fs');
 
 var currentTimer = null // will be used for our timer object
 
@@ -17,12 +18,19 @@ global.shared = {
 	timerMode: 'Stopped'
 }
 
-log.info('Period App Launched');
+var dir = app.getPath('documents') + '/Period/';
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+log.transports.file.file = dir + 'log.txt';
+
 
 app.on('ready', () => {
 	control = new BrowserWindow({width:800, height:900})
 	control.loadURL('file://' + __dirname + '/control.html')
 	control.webContents.openDevTools()
+
+	log.info('Period App Launched');
 
 	control.on('closed', () => {
 		app.quit();
