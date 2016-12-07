@@ -1,5 +1,6 @@
 const electron = require('electron');
 const {app, BrowserWindow, ipcMain} = electron;
+const settings = require('electron-settings');
 var os = require('os');
 var log = require('electron-log');
 var timer = require('timers');
@@ -11,18 +12,19 @@ var currentTimer = null // will be used for our timer object
 let control = null // this will be control window
 let win = null // this will be display window...
 
+settings.configure({ prettify: true })
+settings.defaults({
+	oscPort: 3333,
+	defaultTimerDuration: 600
+})
+
 global.shared = {
-	secsRemaining: 600,
+	secsRemaining: settings.getSync('defaultTimerDuration'),
 	secsElapsed: 0,
 	timerInterval: 1000,
 	timerMode: 'Stopped'
 }
 
-var dir = app.getPath('documents') + '/Period/';
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-}
-log.transports.file.file = dir + 'log.txt';
 
 
 app.on('ready', () => {
@@ -114,7 +116,9 @@ exports.NewOutputWindow = () => {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            O S C     S E R V E R
-var oscServer = new osc.Server(3333, '0.0.0.0');
+var oscPort = 3333;
+settings.get('oscPort').then(val => { oscPort = val })
+var oscServer = new osc.Server(oscPort, '0.0.0.0');
 
 oscServer.on("/timer/start", function (msg, rinfo) {
 	log.info("OSC Received: /timer/start");
