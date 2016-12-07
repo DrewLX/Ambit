@@ -25,6 +25,9 @@ ipcRenderer.on('timerMode', (event, message) => {
 	  },
 
     methods: {
+			OpenPrefs: function() {
+        main.OpenPrefs()
+      },
 			StartTimer: function() {
         main.StartTimer()
       },

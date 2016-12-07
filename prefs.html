@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Period - Preferences</title>
+
+	<!-- Stylesheets -->
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/control.css">
+    <script src="node_modules/vue/dist/vue.js"></script>
+		<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+</head>
+
+<body>
+
+
+<div id="app" class="container">
+
+	<div class="row">
+	  <div class="col-xs-6"><h2>Preferences</h2></div>
+	  <div class="col-xs-6 text-right" style="margin-top: 15px;">
+			<button type="button" class="btn btn-primary" @click="prefsSave()">SAVE</button>
+			<button type="button" class="btn btn-primary" @click="prefsApply()">APPLY</button>
+			<button type="button" class="btn btn-default" @click="prefsCancel()">CANCEL</button>
+		</div>
+	</div>
+
+
+
+	<div class="panel panel-info">
+		<div class="panel-heading">Timer Defaults</div>
+		<div class="panel-body">
+
+			<div class="input-group">
+      	<div class="input-group-addon">Default Timer Duration</div>
+      	<input type="text" class="form-control" placeholder="in seconds" v-model="defaultTimerDuration">
+    	</div>
+
+		</div>
+	</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">Network Settings</div>
+			<div class="panel-body">
+
+				<div class="input-group">
+					<div class="input-group-addon">Port to recieve OSC</div>
+					<input type="text" class="form-control" v-model="oscPort">
+				</div>
+
+			</div>
+		</div>
+
+
+</div>
+
+
+<script>require('./js/prefs.js')</script>
+</body>
+</html>

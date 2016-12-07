@@ -1,5 +1,5 @@
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain} = electron;
+const {app, BrowserWindow, ipcMain, Menu, MenuItem} = electron;
 const settings = require('electron-settings');
 var os = require('os');
 var log = require('electron-log');
@@ -110,6 +110,18 @@ exports.NewOutputWindow = () => {
 	win.on('closed', () => {
 		win = null
 		log.info('Output Window Closed')
+	})
+}
+exports.OpenPrefs = () => {
+	prefs = new BrowserWindow({width: 700, height: 600})
+	prefs.loadURL('file://' + __dirname + '/prefs.html')
+	//win.webContents.openDevTools()
+	log.info('Preferences Opened')
+
+
+	prefs.on('closed', () => {
+		prefs = null
+		log.info('Prefs Window Closed')
 	})
 }
 
