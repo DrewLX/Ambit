@@ -62,7 +62,7 @@ exports.PauseTimer = () => {
 
 exports.StopTimer = () => {
 	timer.clearInterval(currentTimer)
-	global.shared.secsRemaining = 600
+	global.shared.secsRemaining = settings.getSync('defaultTimerDuration')
 	global.shared.secsElapsed = 0;
 	updateTime()
 	global.shared.timerMode = 'Stopped'
@@ -128,10 +128,9 @@ exports.OpenPrefs = () => {
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 //            O S C     S E R V E R
-var oscPort = 3333;
-settings.get('oscPort').then(val => { oscPort = val })
+var oscPort = settings.getSync('oscPort')
 var oscServer = new osc.Server(oscPort, '0.0.0.0');
-
+log.info('OSC Recieving on Port: ' + oscPort)
 oscServer.on("/timer/start", function (msg, rinfo) {
 	log.info("OSC Received: /timer/start");
 	exports.StartTimer();

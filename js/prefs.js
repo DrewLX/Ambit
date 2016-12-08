@@ -3,7 +3,12 @@ const main = remote.require('./main.js')
 const settings = require('electron-settings');
 const {ipcRenderer} = require('electron')
 
+settings.configure({ prettify: true })
 
+function saveSettings() {
+	settings.setSync('defaultTimerDuration', vue.defaultTimerDuration)
+	settings.setSync('oscPort', parseInt(vue.oscPort))
+}
 
 	var vue = new Vue({
 	  el: '#app',
@@ -20,13 +25,13 @@ const {ipcRenderer} = require('electron')
       },
 			prefsSave: function() {
         // save changes and close the window...
-				vue.prefsApply()
-				vue.prefsCancel();
+				saveSettings();
+				var window = remote.getCurrentWindow();
+				window.close();
       },
 			prefsApply: function() {
 				// save changes
-				settings.set('defaultTimerDuration', vue.defaultTimerDuration)
-				settings.set('oscPort', vue.oscPort)
+				saveSettings();
       },
 		},
 
