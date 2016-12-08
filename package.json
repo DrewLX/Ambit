@@ -1,6 +1,6 @@
 {
-  "name": "period",
-  "productName": "Period",
+  "name": "ambit",
+  "productName": "Ambit",
   "version": "0.0.1",
   "description": "Multi purpose countdown timer for AV professionals",
   "main": "main.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DrewLX/Period.git"
+    "url": "git+https://github.com/DrewLX/Ambit.git"
   },
   "author": "Drew Perry & Nick Lloyd",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DrewLX/Period/issues"
+    "url": "https://github.com/DrewLX/Ambit/issues"
   },
-  "homepage": "https://github.com/DrewLX/Period#readme",
+  "homepage": "https://github.com/DrewLX/Ambit#readme",
   "devDependencies": {
     "devtron": "^1.4.0"
   }

@@ -32,7 +32,7 @@ app.on('ready', () => {
 	control.loadURL('file://' + __dirname + '/control.html')
 	control.webContents.openDevTools()
 
-	log.info('Period App Launched');
+	log.info('Ambit App Launched');
 
 	control.on('closed', () => {
 		app.quit();
