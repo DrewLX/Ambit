@@ -4,12 +4,11 @@
 	<meta charset="UTF-8">
 	<title>Ambit - Control</title>
 
-	<!-- Stylesheets -->
-		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="css/control.css">
-    <script src="node_modules/vue/dist/vue.js"></script>
-		<script src="node_modules/jquery/dist/jquery.js"></script>
-		<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/control.css">
+  <script src="node_modules/vue/dist/vue.js"></script>
+	<script>window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.js');</script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 
 <body>
@@ -62,5 +61,10 @@
 
 
 <script>require('./js/control.js')</script>
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
 </body>
 </html>
