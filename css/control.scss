@@ -1,0 +1,603 @@
+/*
+    Imports
+*/
+
+@import "materialize/sass/components/color";
+
+/*
+    Progress bar
+*/
+
+$progress_bar_width: 346px;
+$progress_bar_green_width: 156px;
+$progress_bar_amber_width: 84px;
+$progress_bar_red_width: 84px;
+$progress_bar_over_width: 22px;
+$progress_bar_border_radius: 6px;
+$progress_bar_height: 26px;
+$progress_bar_total_time_left: 26px;
+
+/*
+    Main Controls
+*/
+
+#main-controls {
+    position: absolute;
+    top: 16px;
+    left: 30px;
+    height: 360px;
+    width: 346px;
+    #session-title {
+        font-size: 26px;
+        text-align: center;
+    }
+    .controls-time {
+        font-size: 28px;
+    }
+    .controls-time-title {
+        margin-bottom: 0.1em;
+    }
+    #controls-elapsed {
+        .controls-time {
+            background: color('blue', 'lighten-2');
+            padding-left: 0.2em;
+        }
+        .controls-time-title {
+            padding-left: 0.2em;
+            text-align: left;
+        }
+    }
+    #controls-remain {
+        .controls-time {
+            text-align: right;
+            background: color('green', 'lighten-2');
+            padding-right: 0.2em;
+        }
+        .controls-time-title {
+            padding-right: 0.2em;
+            text-align: right;
+        }
+    }
+}
+
+
+/*
+    Progress Bars
+*/
+
+div.progress-bar-container {
+    height: 120px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 12px;
+}
+
+div.progress-bar-main {
+    position: absolute;
+    width: $progress_bar_width;
+    top: 12px;
+    height: $progress_bar_height;
+    z-index: 10;
+}
+
+div.progress-bar-main div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    border-style: solid;
+    border-color: black;
+}
+
+div.progress-bar-progress {
+    position: absolute;
+    top: 0;
+    height: 50px;
+    left: 0;
+    width: 0;
+}
+
+span.progress-marker-top {
+    position: absolute;
+    top: 0;
+    right: 7px;
+    line-height: 0.7em;
+    width: 0;
+    z-index: 100;
+}
+
+span.progress-marker-bottom {
+    position: absolute;
+    bottom: 0;
+    right: 7px;
+    line-height: 0.7em;
+    width: 0;
+    z-index: 100;
+}
+
+div.progress-bar-overlay {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    right: 0;
+    height: $progress_bar_height;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    border-radius: $progress_bar_border_radius;
+}
+
+div.progress-bar-green {
+    left: 0;
+    width: $progress_bar_green_width;
+    background: color('green', 'base');
+    border-width: 1px 0 1px 1px;
+    border-radius: $progress_bar_border_radius 0 0 $progress_bar_border_radius;
+}
+
+div.progress-bar-amber {
+    left: $progress_bar_green_width;
+    width: $progress_bar_amber_width;
+    background: color('amber', 'base');
+    border-width: 1px 0 1px 1px;
+    border-radius: 0;
+}
+
+div.progress-bar-red {
+    left: $progress_bar_green_width + $progress_bar_amber_width;
+    width: $progress_bar_red_width;
+    background: color('red', 'darken-1');
+    border-width: 1px;
+    border-radius: 0 $progress_bar_border_radius $progress_bar_border_radius 0;
+}
+
+div.progress-bar-over {
+    left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width;
+    width: $progress_bar_over_width;
+    font-size: 20px;
+    letter-spacing: -6px;
+    color: color('red', 'darken-3');
+    border-width: 0;
+}
+
+div.progress-bar-times {
+    position: absolute;
+    top: 46px;
+    height: 18px;
+    width: $progress_bar_width;
+    font-size: 18px;
+    span {
+        position: absolute;
+        padding-left: 0.2em;
+    }
+}
+
+span.progress-bar-time-total {
+    left: $progress_bar_total_time_left;
+    color: color('green', 'darken-3');
+}
+
+span.progress-bar-time-amber {
+    left: $progress_bar_green_width;
+    color: color('amber', 'darken-4');
+}
+
+span.progress-bar-time-red {
+    left: $progress_bar_green_width + $progress_bar_amber_width;
+    color: color('red', 'darken-3');
+}
+
+span.progress-bar-time-zero {
+    right: 0;
+    color: color('red', 'darken-1');
+    text-align: right;
+}
+
+div.progress-bar-tod {
+    position: absolute;
+    top: 76px;
+    height: 18px;
+    width: $progress_bar_width;
+    font-size: 14px;
+    color: color('cyan', 'base');
+    margin-bottom: 20px;
+    span {
+        position: absolute;
+        padding-left: 0.2em;
+    }
+}
+
+span.progress-bar-tod-total {
+    left: $progress_bar_total_time_left;
+}
+
+span.progress-bar-tod-amber {
+    left: $progress_bar_green_width;
+}
+
+span.progress-bar-tod-red {
+    left: 232px;
+    left: $progress_bar_green_width + $progress_bar_amber_width;
+}
+
+span.progress-bar-tod-zero {
+    right: 0;
+    padding-right: 0.2em;
+    text-align: right;
+}
+
+
+/* Progress bar combinations
+Green, amber, red, over
+Green, amber, red
+Green, amber, over
+Green, amber
+Green, red, over
+Green, red
+Green, over
+Green
+
+amber, red, over
+amber, red
+amber
+amber, over
+red, over
+red
+*/
+
+div.progress-bar-container {
+    &.has-green-amber-red-over {
+        //No Change
+    }
+    &.has-green-amber-red {
+        div.progress-bar-green {
+            width: $progress_bar_green_width + $progress_bar_over_width;
+        }
+        div.progress-bar-amber {
+            left: $progress_bar_green_width + $progress_bar_over_width;
+        }
+        div.progress-bar-red {
+            left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_green_width + $progress_bar_over_width;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+    }
+    &.has-green-amber-over {
+        div.progress-bar-amber {
+            width: $progress_bar_amber_width + $progress_bar_red_width;
+            border-radius: 0 $progress_bar_border_radius $progress_bar_border_radius 0;
+            border-right-width: 1px;
+        }
+        div.progress-bar-red {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_green_width;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            display: none;
+        }
+    }
+    &.has-green-amber {
+        div.progress-bar-green {
+            width: $progress_bar_green_width + $progress_bar_over_width;
+        }
+        div.progress-bar-amber {
+            width: $progress_bar_amber_width + $progress_bar_red_width;
+            left: $progress_bar_green_width + $progress_bar_over_width;
+            border-radius: 0 $progress_bar_border_radius $progress_bar_border_radius 0;
+            border-right-width: 1px;
+        }
+        div.progress-bar-red {
+            display: none;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_green_width + $progress_bar_over_width;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            display: none;
+        }
+    }
+    &.has-green-red-over {
+        div.progress-bar-green {
+            width: $progress_bar_green_width + $progress_bar_amber_width;
+        }
+        div.progress-bar-amber {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            display: none;
+        }
+    }
+    &.has-green-red {
+        div.progress-bar-green {
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+        div.progress-bar-amber {
+            display: none;
+        }
+        div.progress-bar-red {
+            left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            display: none;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+    }
+    &.has-green-over {
+        div.progress-bar-green {
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width;
+            border-radius: $progress_bar_border_radius;
+            border-right-width: 1px;
+        }
+        div.progress-bar-amber {
+            display: none;
+        }
+        div.progress-bar-red {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            display: none;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            display: none;
+        }
+    }
+    &.has-green {
+        div.progress-bar-green {
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width + $progress_bar_over_width;
+            border-radius: $progress_bar_border_radius;
+            border-right-width: 1px;
+        }
+        div.progress-bar-amber {
+            display: none;
+        }
+        div.progress-bar-red {
+            display: none;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            display: none;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            display: none;
+        }
+    }
+    &.has-amber-red-over {
+        div.progress-bar-green {
+            display: none;
+        }
+        div.progress-bar-amber {
+            left: 0;
+            width: $progress_bar_green_width + $progress_bar_amber_width;
+            border-radius: $progress_bar_border_radius 0 0 $progress_bar_border_radius;
+        }
+        span.progress-bar-time-total,
+        span.progress-bar-tod-total {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_total_time_left;
+        }
+    }
+    &.has-amber-red {
+        div.progress-bar-green {
+            display: none;
+        }
+        div.progress-bar-amber {
+            left: 0;
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+            border-radius: $progress_bar_border_radius 0 0 $progress_bar_border_radius;
+        }
+        div.progress-bar-red {
+            left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-total,
+        span.progress-bar-tod-total {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_total_time_left;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            left: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_over_width;
+        }
+    }
+    &.has-amber-over {
+        div.progress-bar-green {
+            display: none;
+        }
+        div.progress-bar-amber {
+            left: 0;
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width;
+            border-radius: $progress_bar_border_radius;
+            border-right-width: 1px;
+        }
+        div.progress-bar-red {
+            display: none;
+        }
+        span.progress-bar-time-total,
+        span.progress-bar-tod-total {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_total_time_left;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            display: none;
+        }
+    }
+    &.has-amber {
+        div.progress-bar-green {
+            display: none;
+        }
+        div.progress-bar-amber {
+            left: 0;
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width + $progress_bar_over_width;
+            border-radius: $progress_bar_border_radius;
+            border-right-width: 1px;
+        }
+        div.progress-bar-red {
+            display: none;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-total,
+        span.progress-bar-tod-total {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            left: $progress_bar_total_time_left;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            display: none;
+        }
+    }
+    &.has-red-over {
+        div.progress-bar-green {
+            display: none;
+        }
+        div.progress-bar-amber {
+            display: none;
+        }
+        div.progress-bar-red {
+            left: 0;
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width;
+            border-radius: $progress_bar_border_radius;
+        }
+        span.progress-bar-time-total,
+        span.progress-bar-tod-total {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            display: none;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            left: $progress_bar_total_time_left;
+        }
+    }
+    &.has-red {
+        div.progress-bar-green {
+            display: none;
+        }
+        div.progress-bar-amber {
+            display: none;
+        }
+        div.progress-bar-red {
+            left: 0;
+            width: $progress_bar_green_width + $progress_bar_amber_width + $progress_bar_red_width + $progress_bar_over_width;
+            border-radius: $progress_bar_border_radius;
+        }
+        div.progress-bar-over {
+            display: none;
+        }
+        span.progress-bar-time-total,
+        span.progress-bar-tod-total {
+            display: none;
+        }
+        span.progress-bar-time-amber,
+        span.progress-bar-tod-amber {
+            display: none;
+        }
+        span.progress-bar-time-red,
+        span.progress-bar-tod-red {
+            left: $progress_bar_total_time_left;
+        }
+    }
+}
+
+div.control-buttons {
+    text-align: center;
+}
+
+div.control-buttons button {
+    font-size: 30px;
+}
+
+div.output-preview-container {
+    position: absolute;
+    top: 22px;
+    left: 430px;
+    width: 420px;
+    height: 420px * (9 / 16);
+    background: #bbb;
+}
+
+div.output-preview {
+    background: black;
+    position: absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+}
+
+div.preview-session-title{
+    position:absolute;
+    top:0;
+    height:40px;
+    left:0;
+    right:0;
+    background-color: color('blue-grey', 'darken-3');
+    color: color('grey', 'lighten-2');
+    p{
+        font-size: 32px;
+        line-height: 40px;
+        width:100%;
+        text-align:center;
+        font-weight:400;
+    }
+}
+
+p.preview-main-timer{
+    position:absolute;
+    top: 36px;
+    left: 0;
+    right: 0;
+    
+    text-align:center;
+    font-size: 90px;
+    color: white;
+}

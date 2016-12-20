@@ -1,66 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Ambit - Control</title>
 
-	<!-- Stylesheets -->
-		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+<head>
+    <meta charset="UTF-8">
+    <title>Ambit - Control</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/control.css">
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="css/materialize/iconfont/material-icons.css">
+    <script>
+        window.$ = window.jQuery = require('jquery');
+    </script>
     <script src="node_modules/vue/dist/vue.js"></script>
-		<script src="node_modules/jquery/dist/jquery.js"></script>
-		<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 
 <body>
-
-
-<div id="app" class="container">
-
-	<div class="row">
-		<div class="col-sm-4"></div>
-		<div class="col-sm-4"><h2 class="text-center">Ambit Control</h2></div>
-		<div class="col-sm-4 text-right" style="padding-top: 12px;"><button @click="OpenPrefs()" class="btn btn-default">Prefences</button></div>
-	</div>
-
-
-	<div class="panel" :class="{ 'panel-success':timerMode=='Running', 'panel-warning':timerMode=='Paused', 'panel-danger':timerMode=='Stopped'}">
-		<div class="panel-heading">Timer Controls - {{timerMode}}</div>
-		<div class="panel-body">
-			<p>Remaining: <strong>{{timeRemaining}}</strong><span v-if="timerMode!=='Stopped'"> - Elapsed: {{timeElapsed}}</span></p>
-			<button @click="StartTimer" class="btn btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
-			<button @click="PauseTimer" class="btn btn-warning"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span>Pause</button>
-			<button @click="StopTimer" class="btn btn-danger"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</button>
-		</div>
-	</div>
-
-
-		<div class="panel panel-info">
-			<div class="panel-heading">Speed Controls - {{timerInterval}}ms</div>
-			<div class="panel-body">
-				<div class="btn-group">
-					<button @click="SetSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
-					<button @click="SetSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
-					<button @click="SetSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
-					<button @click="SetSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
-					<button @click="SetSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
-				</div>
-			</div>
-		</div>
-
-
-
-		<div class="panel panel-info">
-			<div class="panel-heading">Display Controls</div>
-			<div class="panel-body">
-				<button @click="NewOutputWindow" class="btn btn-info">New Output Window</button>
-			</div>
-		</div>
-
-
-</div>
-
-
-<script>require('./js/control.js')</script>
+    <div id="app">
+        <div id="main-controls">
+            <p id="session-title">{{ sessionTitle }}</p>
+            <div class="row">
+                <div class="col-xs-6" id="controls-elapsed">
+                    <p class="controls-time-title">Elapsed</p>
+                    <p class="controls-time">{{ timerElapsedText }}</p>
+                </div>
+                <div class="col-xs-6" id="controls-remain">
+                    <p class="controls-time-title">Remain</p>
+                    <p class="controls-time">{{ timerRemainingText }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div :class="['progress-bar-container', progressBarClass]">
+                        <div class="progress-bar-main">
+                            <div class="progress-bar-green"></div>
+                            <div class="progress-bar-amber"></div>
+                            <div class="progress-bar-red"></div>
+                            <div class="progress-bar-over" title="Allow Over Run">
+                                <span class="fa fa-chevron-right"></span>
+                                <span class="fa fa-chevron-right"></span>
+                            </div>
+                        </div>
+                        <div class="progress-bar-progress" v-bind:style="{width : progressBarPosition + 'px'}">
+                            <span class="progress-marker-top fa fa-chevron-down"></span>
+                            <span class="progress-marker-bottom fa fa-chevron-up"></span>
+                            <div class="progress-bar-overlay"></div>
+                        </div>
+                        <div class="progress-bar-times">
+                            <span class="material-icons">av_timer</span>
+                            <span class="progress-bar-time-total">{{ breakpointTotalText }}</span>
+                            <span class="progress-bar-time-amber">{{ breakpointAmberText }}</span>
+                            <span class="progress-bar-time-red">{{ breakpointRedText }}</span>
+                        </div>
+                        <div class="progress-bar-tod">
+                            <span class="material-icons">schedule</span>
+                            <span class="progress-bar-tod-total">13:00</span>
+                            <span class="progress-bar-tod-amber">13:18</span>
+                            <span class="progress-bar-tod-red">13:19</span>
+                            <span class="progress-bar-tod-zero">13:20</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row control-buttons">
+                <div class="col-xs-3">
+                    <button @click="stopTimer" class="btn btn-default material-icons">skip_previous</button>
+                </div>
+                <div class="col-xs-6">
+                    <button @click="startTimer" class="btn btn-default material-icons">play_arrow</button>
+                    <button @click="pauseTimer" class="btn btn-default material-icons">pause</button>
+                </div>
+                <div class="col-xs-3">
+                    <button class="btn btn-default material-icons">redo</button>
+                </div>
+                <input type="range" v-model="sliderTestInput" min="0" max="1300">
+                <input id="temp-has-green" type="checkbox" v-model="timerHasGreen">
+                <label for="temp-has-green">Has Green</label>
+                <br>
+                <input id="temp-has-amber" type="checkbox" v-model="timerHasAmber">
+                <label for="temp-has-amber">Has Amber</label>
+                <br>
+                <input id="temp-has-red" type="checkbox" v-model="timerHasRed">
+                <label for="temp-has-red">Has Red</label>
+                <br>
+                <input id="temp-can-overrun" type="checkbox" v-model="timerCanOverrun">
+                <label for="temp-can-overrun">Has Over</label>
+                <br>
+            </div>
+        </div>
+        <div class="output-preview-container">
+            <div class="output-preview">
+            <div class="preview-session-title"><p>{{ sessionTitle }}</p></div>
+                <p class="preview-main-timer">{{ timerRemainingText }}</p>
+            </div>
+        </div>
+    </div><!-- /main-controls -->
+    
+    <!--<div class="col-sm-4">
+            
+         <div class="col-sm-4 text-right" style="padding-top: 12px;">
+            <button @click="openPrefs()" class="btn btn-default">Prefences</button>
+        </div> 
+         <div class="panel" :class="{ 'panel-success':timerMode=='running', 'panel-warning':timerMode=='paused', 'panel-danger':timerMode=='stopped'}">
+            <div class="panel-heading">Timer Controls - {{timerMode}}</div>
+            <div class="panel-body">
+                <p>Remaining: <strong>{{timeRemaining}}</strong><span v-if="timerMode!=='Stopped'"> - Elapsed: {{timeElapsed}}</span></p>
+                <button @click="startTimer" class="btn btn-success"><span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start</button>
+                <button @click="pauseTimer" class="btn btn-warning"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span>Pause</button>
+                <button @click="stopTimer" class="btn btn-danger"><span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</button>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Speed Controls - {{timerInterval}}ms</div>
+            <div class="panel-body">
+                <div class="btn-group">
+                    <button @click="setSpeed(1250)" class="btn btn-default" :class="{'active': timerInterval == 1250 }">0.75x</button>
+                    <button @click="setSpeed(1100)" class="btn btn-default" :class="{'active': timerInterval == 1100 }">0.9x</button>
+                    <button @click="setSpeed(1000)" class="btn btn-default" :class="{'active': timerInterval == 1000 }">1x</button>
+                    <button @click="setSpeed(900)" class="btn btn-default" :class="{'active': timerInterval == 900 }">1.1x</button>
+                    <button @click="setSpeed(750)" class="btn btn-default" :class="{'active': timerInterval == 750 }">1.25x</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">Display Controls</div>
+            <div class="panel-body">
+                <button @click="newOutputWindow" class="btn btn-info">New Output Window</button>
+            </div>
+        </div> -->
+    <script>
+    
+    require('./js/control.js');
+    </script>
 </body>
 </html>

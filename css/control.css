@@ -1,0 +1,440 @@
+/*
+    Imports
+*/
+/*
+    Progress bar
+*/
+/*
+    Main Controls
+*/
+#main-controls {
+  position: absolute;
+  top: 16px;
+  left: 30px;
+  height: 360px;
+  width: 346px; }
+  #main-controls #session-title {
+    font-size: 26px;
+    text-align: center; }
+  #main-controls .controls-time {
+    font-size: 28px; }
+  #main-controls .controls-time-title {
+    margin-bottom: 0.1em; }
+  #main-controls #controls-elapsed .controls-time {
+    background: #64B5F6;
+    padding-left: 0.2em; }
+  #main-controls #controls-elapsed .controls-time-title {
+    padding-left: 0.2em;
+    text-align: left; }
+  #main-controls #controls-remain .controls-time {
+    text-align: right;
+    background: #81C784;
+    padding-right: 0.2em; }
+  #main-controls #controls-remain .controls-time-title {
+    padding-right: 0.2em;
+    text-align: right; }
+
+/*
+    Progress Bars
+*/
+div.progress-bar-container {
+  height: 120px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 12px; }
+
+div.progress-bar-main {
+  position: absolute;
+  width: 346px;
+  top: 12px;
+  height: 26px;
+  z-index: 10; }
+
+div.progress-bar-main div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 20;
+  border-style: solid;
+  border-color: black; }
+
+div.progress-bar-progress {
+  position: absolute;
+  top: 0;
+  height: 50px;
+  left: 0;
+  width: 0; }
+
+span.progress-marker-top {
+  position: absolute;
+  top: 0;
+  right: 7px;
+  line-height: 0.7em;
+  width: 0;
+  z-index: 100; }
+
+span.progress-marker-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 7px;
+  line-height: 0.7em;
+  width: 0;
+  z-index: 100; }
+
+div.progress-bar-overlay {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  border-radius: 6px; }
+
+div.progress-bar-green {
+  left: 0;
+  width: 156px;
+  background: #4CAF50;
+  border-width: 1px 0 1px 1px;
+  border-radius: 6px 0 0 6px; }
+
+div.progress-bar-amber {
+  left: 156px;
+  width: 84px;
+  background: #ffc107;
+  border-width: 1px 0 1px 1px;
+  border-radius: 0; }
+
+div.progress-bar-red {
+  left: 240px;
+  width: 84px;
+  background: #E53935;
+  border-width: 1px;
+  border-radius: 0 6px 6px 0; }
+
+div.progress-bar-over {
+  left: 324px;
+  width: 22px;
+  font-size: 20px;
+  letter-spacing: -6px;
+  color: #C62828;
+  border-width: 0; }
+
+div.progress-bar-times {
+  position: absolute;
+  top: 46px;
+  height: 18px;
+  width: 346px;
+  font-size: 18px; }
+  div.progress-bar-times span {
+    position: absolute;
+    padding-left: 0.2em; }
+
+span.progress-bar-time-total {
+  left: 26px;
+  color: #2E7D32; }
+
+span.progress-bar-time-amber {
+  left: 156px;
+  color: #ff6f00; }
+
+span.progress-bar-time-red {
+  left: 240px;
+  color: #C62828; }
+
+span.progress-bar-time-zero {
+  right: 0;
+  color: #E53935;
+  text-align: right; }
+
+div.progress-bar-tod {
+  position: absolute;
+  top: 76px;
+  height: 18px;
+  width: 346px;
+  font-size: 14px;
+  color: #00bcd4;
+  margin-bottom: 20px; }
+  div.progress-bar-tod span {
+    position: absolute;
+    padding-left: 0.2em; }
+
+span.progress-bar-tod-total {
+  left: 26px; }
+
+span.progress-bar-tod-amber {
+  left: 156px; }
+
+span.progress-bar-tod-red {
+  left: 232px;
+  left: 240px; }
+
+span.progress-bar-tod-zero {
+  right: 0;
+  padding-right: 0.2em;
+  text-align: right; }
+
+/* Progress bar combinations
+Green, amber, red, over
+Green, amber, red
+Green, amber, over
+Green, amber
+Green, red, over
+Green, red
+Green, over
+Green
+
+amber, red, over
+amber, red
+amber
+amber, over
+red, over
+red
+*/
+div.progress-bar-container.has-green-amber-red div.progress-bar-green {
+  width: 178px; }
+div.progress-bar-container.has-green-amber-red div.progress-bar-amber {
+  left: 178px; }
+div.progress-bar-container.has-green-amber-red div.progress-bar-red {
+  left: 262px; }
+div.progress-bar-container.has-green-amber-red div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-green-amber-red span.progress-bar-time-amber,
+div.progress-bar-container.has-green-amber-red span.progress-bar-tod-amber {
+  left: 178px; }
+div.progress-bar-container.has-green-amber-red span.progress-bar-time-red,
+div.progress-bar-container.has-green-amber-red span.progress-bar-tod-red {
+  left: 262px; }
+div.progress-bar-container.has-green-amber-over div.progress-bar-amber {
+  width: 168px;
+  border-radius: 0 6px 6px 0;
+  border-right-width: 1px; }
+div.progress-bar-container.has-green-amber-over div.progress-bar-red {
+  display: none; }
+div.progress-bar-container.has-green-amber-over span.progress-bar-time-amber,
+div.progress-bar-container.has-green-amber-over span.progress-bar-tod-amber {
+  left: 156px; }
+div.progress-bar-container.has-green-amber-over span.progress-bar-time-red,
+div.progress-bar-container.has-green-amber-over span.progress-bar-tod-red {
+  display: none; }
+div.progress-bar-container.has-green-amber div.progress-bar-green {
+  width: 178px; }
+div.progress-bar-container.has-green-amber div.progress-bar-amber {
+  width: 168px;
+  left: 178px;
+  border-radius: 0 6px 6px 0;
+  border-right-width: 1px; }
+div.progress-bar-container.has-green-amber div.progress-bar-red {
+  display: none; }
+div.progress-bar-container.has-green-amber div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-green-amber span.progress-bar-time-amber,
+div.progress-bar-container.has-green-amber span.progress-bar-tod-amber {
+  left: 178px; }
+div.progress-bar-container.has-green-amber span.progress-bar-time-red,
+div.progress-bar-container.has-green-amber span.progress-bar-tod-red {
+  display: none; }
+div.progress-bar-container.has-green-red-over div.progress-bar-green {
+  width: 240px; }
+div.progress-bar-container.has-green-red-over div.progress-bar-amber {
+  display: none; }
+div.progress-bar-container.has-green-red-over span.progress-bar-time-amber,
+div.progress-bar-container.has-green-red-over span.progress-bar-tod-amber {
+  display: none; }
+div.progress-bar-container.has-green-red div.progress-bar-green {
+  width: 262px; }
+div.progress-bar-container.has-green-red div.progress-bar-amber {
+  display: none; }
+div.progress-bar-container.has-green-red div.progress-bar-red {
+  left: 262px; }
+div.progress-bar-container.has-green-red div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-green-red span.progress-bar-time-amber,
+div.progress-bar-container.has-green-red span.progress-bar-tod-amber {
+  display: none; }
+div.progress-bar-container.has-green-red span.progress-bar-time-red,
+div.progress-bar-container.has-green-red span.progress-bar-tod-red {
+  left: 262px; }
+div.progress-bar-container.has-green-over div.progress-bar-green {
+  width: 324px;
+  border-radius: 6px;
+  border-right-width: 1px; }
+div.progress-bar-container.has-green-over div.progress-bar-amber {
+  display: none; }
+div.progress-bar-container.has-green-over div.progress-bar-red {
+  display: none; }
+div.progress-bar-container.has-green-over span.progress-bar-time-amber,
+div.progress-bar-container.has-green-over span.progress-bar-tod-amber {
+  display: none; }
+div.progress-bar-container.has-green-over span.progress-bar-time-red,
+div.progress-bar-container.has-green-over span.progress-bar-tod-red {
+  display: none; }
+div.progress-bar-container.has-green div.progress-bar-green {
+  width: 346px;
+  border-radius: 6px;
+  border-right-width: 1px; }
+div.progress-bar-container.has-green div.progress-bar-amber {
+  display: none; }
+div.progress-bar-container.has-green div.progress-bar-red {
+  display: none; }
+div.progress-bar-container.has-green div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-green span.progress-bar-time-amber,
+div.progress-bar-container.has-green span.progress-bar-tod-amber {
+  display: none; }
+div.progress-bar-container.has-green span.progress-bar-time-red,
+div.progress-bar-container.has-green span.progress-bar-tod-red {
+  display: none; }
+div.progress-bar-container.has-amber-red-over div.progress-bar-green {
+  display: none; }
+div.progress-bar-container.has-amber-red-over div.progress-bar-amber {
+  left: 0;
+  width: 240px;
+  border-radius: 6px 0 0 6px; }
+div.progress-bar-container.has-amber-red-over span.progress-bar-time-total,
+div.progress-bar-container.has-amber-red-over span.progress-bar-tod-total {
+  display: none; }
+div.progress-bar-container.has-amber-red-over span.progress-bar-time-amber,
+div.progress-bar-container.has-amber-red-over span.progress-bar-tod-amber {
+  left: 26px; }
+div.progress-bar-container.has-amber-red div.progress-bar-green {
+  display: none; }
+div.progress-bar-container.has-amber-red div.progress-bar-amber {
+  left: 0;
+  width: 262px;
+  border-radius: 6px 0 0 6px; }
+div.progress-bar-container.has-amber-red div.progress-bar-red {
+  left: 262px; }
+div.progress-bar-container.has-amber-red div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-amber-red span.progress-bar-time-total,
+div.progress-bar-container.has-amber-red span.progress-bar-tod-total {
+  display: none; }
+div.progress-bar-container.has-amber-red span.progress-bar-time-amber,
+div.progress-bar-container.has-amber-red span.progress-bar-tod-amber {
+  left: 26px; }
+div.progress-bar-container.has-amber-red span.progress-bar-time-red,
+div.progress-bar-container.has-amber-red span.progress-bar-tod-red {
+  left: 262px; }
+div.progress-bar-container.has-amber-over div.progress-bar-green {
+  display: none; }
+div.progress-bar-container.has-amber-over div.progress-bar-amber {
+  left: 0;
+  width: 324px;
+  border-radius: 6px;
+  border-right-width: 1px; }
+div.progress-bar-container.has-amber-over div.progress-bar-red {
+  display: none; }
+div.progress-bar-container.has-amber-over span.progress-bar-time-total,
+div.progress-bar-container.has-amber-over span.progress-bar-tod-total {
+  display: none; }
+div.progress-bar-container.has-amber-over span.progress-bar-time-amber,
+div.progress-bar-container.has-amber-over span.progress-bar-tod-amber {
+  left: 26px; }
+div.progress-bar-container.has-amber-over span.progress-bar-time-red,
+div.progress-bar-container.has-amber-over span.progress-bar-tod-red {
+  display: none; }
+div.progress-bar-container.has-amber div.progress-bar-green {
+  display: none; }
+div.progress-bar-container.has-amber div.progress-bar-amber {
+  left: 0;
+  width: 346px;
+  border-radius: 6px;
+  border-right-width: 1px; }
+div.progress-bar-container.has-amber div.progress-bar-red {
+  display: none; }
+div.progress-bar-container.has-amber div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-amber span.progress-bar-time-total,
+div.progress-bar-container.has-amber span.progress-bar-tod-total {
+  display: none; }
+div.progress-bar-container.has-amber span.progress-bar-time-amber,
+div.progress-bar-container.has-amber span.progress-bar-tod-amber {
+  left: 26px; }
+div.progress-bar-container.has-amber span.progress-bar-time-red,
+div.progress-bar-container.has-amber span.progress-bar-tod-red {
+  display: none; }
+div.progress-bar-container.has-red-over div.progress-bar-green {
+  display: none; }
+div.progress-bar-container.has-red-over div.progress-bar-amber {
+  display: none; }
+div.progress-bar-container.has-red-over div.progress-bar-red {
+  left: 0;
+  width: 324px;
+  border-radius: 6px; }
+div.progress-bar-container.has-red-over span.progress-bar-time-total,
+div.progress-bar-container.has-red-over span.progress-bar-tod-total {
+  display: none; }
+div.progress-bar-container.has-red-over span.progress-bar-time-amber,
+div.progress-bar-container.has-red-over span.progress-bar-tod-amber {
+  display: none; }
+div.progress-bar-container.has-red-over span.progress-bar-time-red,
+div.progress-bar-container.has-red-over span.progress-bar-tod-red {
+  left: 26px; }
+div.progress-bar-container.has-red div.progress-bar-green {
+  display: none; }
+div.progress-bar-container.has-red div.progress-bar-amber {
+  display: none; }
+div.progress-bar-container.has-red div.progress-bar-red {
+  left: 0;
+  width: 346px;
+  border-radius: 6px; }
+div.progress-bar-container.has-red div.progress-bar-over {
+  display: none; }
+div.progress-bar-container.has-red span.progress-bar-time-total,
+div.progress-bar-container.has-red span.progress-bar-tod-total {
+  display: none; }
+div.progress-bar-container.has-red span.progress-bar-time-amber,
+div.progress-bar-container.has-red span.progress-bar-tod-amber {
+  display: none; }
+div.progress-bar-container.has-red span.progress-bar-time-red,
+div.progress-bar-container.has-red span.progress-bar-tod-red {
+  left: 26px; }
+
+div.control-buttons {
+  text-align: center; }
+
+div.control-buttons button {
+  font-size: 30px; }
+
+div.output-preview-container {
+  position: absolute;
+  top: 22px;
+  left: 430px;
+  width: 420px;
+  height: 236.25px;
+  background: #bbb; }
+
+div.output-preview {
+  background: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
+
+div.preview-session-title {
+  position: absolute;
+  top: 0;
+  height: 40px;
+  left: 0;
+  right: 0;
+  background-color: #37474f;
+  color: #e0e0e0; }
+  div.preview-session-title p {
+    font-size: 32px;
+    line-height: 40px;
+    width: 100%;
+    text-align: center;
+    font-weight: 400; }
+
+p.preview-main-timer {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 90px;
+  color: white; }
+
+/*# sourceMappingURL=control.css.map */
