@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="css/materialize/iconfont/material-icons.css">
     <script>
-        window.$ = window.jQuery = require('jquery');
+    window.$ = window.jQuery = require('jquery');
     </script>
     <script src="node_modules/vue/dist/vue.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
@@ -91,12 +91,14 @@
         </div>
         <div class="output-preview-container">
             <div class="output-preview">
-            <div class="preview-session-title"><p>{{ sessionTitle }}</p></div>
+                <div class="preview-session-title">
+                    <p>{{ sessionTitle }}</p>
+                </div>
                 <p class="preview-main-timer">{{ timerRemainingText }}</p>
             </div>
         </div>
-    </div><!-- /main-controls -->
-    
+    </div>
+    <!-- /main-controls -->
     <!--<div class="col-sm-4">
             
          <div class="col-sm-4 text-right" style="padding-top: 12px;">
@@ -130,8 +132,11 @@
             </div>
         </div> -->
     <script>
-    
     require('./js/control.js');
+    $(function() {
+        $('[data-toggle="popover"]').popover()
+    })
     </script>
 </body>
+
 </html>
