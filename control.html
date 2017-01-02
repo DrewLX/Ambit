@@ -18,6 +18,14 @@
 
 <body>
     <div id="app">
+
+      <div id="top-menu">
+        <div class="top-menu-item material-icons">settings_overscan</div>
+        <div class="top-menu-item material-icons">settings</div>
+        <div class="top-menu-item top-menu-item-right material-icons">share</div>
+      </div>
+
+
         <div id="main-controls">
             <p id="session-title">{{ sessionTitle }}</p>
             <div class="row">
@@ -100,10 +108,10 @@
     </div>
     <!-- /main-controls -->
     <!--<div class="col-sm-4">
-            
+
          <div class="col-sm-4 text-right" style="padding-top: 12px;">
             <button @click="openPrefs()" class="btn btn-default">Prefences</button>
-        </div> 
+        </div>
          <div class="panel" :class="{ 'panel-success':timerMode=='running', 'panel-warning':timerMode=='paused', 'panel-danger':timerMode=='stopped'}">
             <div class="panel-heading">Timer Controls - {{timerMode}}</div>
             <div class="panel-body">

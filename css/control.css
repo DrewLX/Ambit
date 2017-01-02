@@ -5,11 +5,28 @@
     Progress bar
 */
 /*
+    Top Menu Bar
+*/
+#top-menu {
+  height: 42px;
+  background-color: #e0e0e0;
+  font-size: 28px;
+  text-align: center; }
+  #top-menu .top-menu-item {
+    display: inline;
+    margin: 0px 6px 0px 6px; }
+  #top-menu .top-menu-item-right {
+    float: right;
+    margin-right: 10px; }
+  #top-menu .top-menu-item:hover {
+    color: #1976D2; }
+
+/*
     Main Controls
 */
 #main-controls {
   position: absolute;
-  top: 16px;
+  top: 58px;
   left: 30px;
   height: 360px;
   width: 346px; }
@@ -399,7 +416,7 @@ div.control-buttons button {
 
 div.output-preview-container {
   position: absolute;
-  top: 22px;
+  top: 64px;
   left: 430px;
   width: 420px;
   height: 236.25px;
@@ -430,7 +447,7 @@ div.preview-session-title {
 
 p.preview-main-timer {
   position: absolute;
-  top: 36px;
+  top: 78px;
   left: 0;
   right: 0;
   text-align: center;

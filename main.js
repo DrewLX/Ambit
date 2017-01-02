@@ -24,14 +24,14 @@ global.ambit_session = {
     secsElapsed: 0,
     timerInterval: 1000,
     timerMode: 'Stopped',
-    sessionProgress: 0.4, //Decimal percentage of time elapsed, range 0-1. 2 = over time 
+    sessionProgress: 0.4, //Decimal percentage of time elapsed, range 0-1. 2 = over time
     sessionTitle: 'Fred Smith', //User definable name for the session
     breakpoints: { total: 1200, amber: 120, red: 60 }, //Breakponts in seconds
     allowOverrun: true
 }
 
 app.on('ready', () => {
-    control = new BrowserWindow({ 'minWidth': 870, 'minHeight': 600, 'width': 870, 'height': 600 });
+    control = new BrowserWindow({ 'minWidth': 870, 'minHeight': 600, 'width': 870, 'height': 700 });
     control.loadURL('file://' + __dirname + '/control.html');
     control.webContents.openDevTools();
 
